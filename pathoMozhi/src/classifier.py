@@ -134,7 +134,7 @@ def train(csv_file, feature_loader, project_name="perceiver_pretrain", run_name=
 
         if acc > best_acc:
             best_acc = acc
-            checkpoint_path = f"/mnt/bulk-titan/vidhya/pathMozhi/pathoMozhi/best_perceiver_classifier_epoch{epoch+1}_valacc{acc:.4f}_trainloss{avg_train_loss:.4f}_valloss{avg_val_loss:.4f}.pt"
+            checkpoint_path = f"./pathMozhi/pathoMozhi/best_perceiver_classifier_epoch{epoch+1}_valacc{acc:.4f}_trainloss{avg_train_loss:.4f}_valloss{avg_val_loss:.4f}.pt"
             torch.save(model.state_dict(), checkpoint_path)
             wandb.save(checkpoint_path)
 
