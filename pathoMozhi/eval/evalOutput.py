@@ -19,10 +19,14 @@ model, tokenizer = create_model_and_transforms(
 )
 tokenizer.padding_side = "left"
 model.to(device)
-
 checkpoint_path = "./checkpoints/checkpoint_125.pt"
 checkpoint = torch.load(checkpoint_path, map_location=device)
 
+if "model_state_dict" in checkpoint:
+    print('Yup we do have a "model_state_dict" key in the checkpoint')
+    checkpoint = checkpoint["model_state_dict"]
+    checkpoint = {k.replace("module.", ""): v for k, v in checkpoint.items()}
+#model.load_state_dict(checkpoint, strict=False)
 state = model.load_state_dict(checkpoint, strict=False)
 model.eval()
 
